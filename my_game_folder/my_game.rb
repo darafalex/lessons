@@ -5,7 +5,7 @@ require 'ball'
 
 class MyGame < Gosu::Window
   def initialize
-    super(800, 600, false)
+    super(700, 500, false)
     @player1 = Player.new(self)
     @balls = 1.times.map {Ball.new(self)}
     @running = true
