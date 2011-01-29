@@ -11,7 +11,7 @@ class MyGame < Gosu::Window
     @running = true
     @font = Gosu::Font.new(self, Gosu::default_font_name, 60)
     @highest_score = 0
-    @background = Gosu::Image.new(self, "images/background.png", true )
+    @background = Gosu::Image.new(self, "images/golfcourse.png", true )
     @score = 0
   end
   
@@ -50,7 +50,7 @@ class MyGame < Gosu::Window
       if button_down? Gosu::Button::KbEscape
         restart_game       
       end
-    end
+   	 end
   end
   
   def restart_game
