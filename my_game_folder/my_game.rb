@@ -5,12 +5,12 @@ require 'ball'
 
 class MyGame < Gosu::Window
   def initialize
-    super(2000, 2000, false)
+    super(800, 600, false)
     @player1 = Player.new(self)
-    @balls = 50.times.map {Ball.new(self)}
+    @balls = 1.times.map {Ball.new(self)}
     @running = true
     @font = Gosu::Font.new(self, Gosu::default_font_name, 60)
-    
+    @highest_score = 0
     @background = Gosu::Image.new(self, "images/background.png", true )
     @score = 0
   end
@@ -18,6 +18,11 @@ class MyGame < Gosu::Window
   def update
     if @running
       @score = @score + 1
+      
+      if @score%100 == 0
+      	@balls << Ball.new(self)
+      end
+
       if button_down? Gosu::Button::KbLeft
         @player1.move_left
       end
@@ -43,22 +48,26 @@ class MyGame < Gosu::Window
       
     else
       if button_down? Gosu::Button::KbEscape
-        restart_game
+        restart_game       
       end
     end
   end
   
   def restart_game
     @score = 0
+    @balls = [Ball.new(self)]
     @running = true
     @balls.each { |ball| ball.reset! }
     @player1.reset!
   end
+
   def boom!
     @running = false
+    @highest_score = @score unless @highest_score > @score
   end
   
   def draw
+    @font.draw("Highscore is: #{@highest_score}", 20, 80, 6)
     @font.draw("The score is: #{@score}", 20,20,5)
     @background.draw(0,0,1)
     @player1.draw

@@ -7,8 +7,8 @@ class Player
   end
   
   def reset!
-    @x = 975
-    @y = 1950
+    @x = 375
+    @y = 550
   end
   
   def draw
@@ -19,7 +19,7 @@ class Player
     if @x < 0
       @x = 0
     else
-      @x = @x - rand(30)
+      @x = @x - 10
     end
   end
   
@@ -27,7 +27,7 @@ class Player
     if @x > (@game_window.width - 75)
       @x = @game_window.width - 75
     else
-      @x = @x + rand(30)
+      @x = @x + 10
     end
   end
   
@@ -35,7 +35,7 @@ class Player
     if @y < 0
       @y = 0
     else
-      @y = @y - rand(30)
+      @y = @y - 10
     end
   end
   
@@ -43,11 +43,11 @@ class Player
     if @y > (@game_window.height-75)
       @y = @game_window.height - 75
     else
-      @y = @y + rand(30)
+      @y = @y + 10
     end
   end
   def hit_by?(balls)
-    balls.any? { |ball| Gosu::distance(@x,@y,ball.x, ball.y) < 50}
+    balls.any? { |ball| Gosu::distance(@x,@y,ball.x, ball.y) < 20}
   end   
   
 end 
